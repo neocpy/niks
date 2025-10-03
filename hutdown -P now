@@ -1,0 +1,35 @@
+[4mswaybg[24m(1)                                                                                    General Commands Manual                                                                                    [4mswaybg[24m(1)
+
+[1mNAME[0m
+       swaybg - Background for Wayland
+
+[1mSYNOPSIS[0m
+       [1mswaybg [22m[options...]
+
+       Displays a background image on all outputs of your Wayland session.
+
+       Without an output specified, appearance options apply to all outputs. Per-output appearance options can be set by passing [4m-o,[24m [4m--output[24m followed by these options.
+
+[1mOPTIONS[0m
+       [1m-c, --color [22m<[#]rrggbb>
+           Set the background color.
+
+       [1m-h, --help[0m
+           Show help message and quit.
+
+       [1m-i, --image [22m<path>
+           Set the background image.
+
+       [1m-m, --mode [22m<mode>
+           Scaling mode for images: [4mstretch[24m, [4mfill[24m, [4mfit[24m, [4mcenter[24m, or [4mtile[24m. Use the additional mode [4msolid_color[24m to display only the background color, even if a background image is specified.
+
+       [1m-o, --output [22m<name>
+           Select an output to configure. Subsequent appearance options will only apply to this output. The special value [4m*[24m selects all outputs.
+
+       [1m-v, --version[0m
+           Show the version number and quit.
+
+[1mAUTHORS[0m
+       Maintained by Drew DeVault <sir@cmpwn.com>, who is assisted by other open source contributors. For more information about swaybg development, see https://github.com/swaywm/swaybg.
+
+                                                                                                    1980-01-01                                                                                          [4mswaybg[24m(1)
