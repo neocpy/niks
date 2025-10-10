@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #../pkgs.nix
+      ../../pkgs.nix
       ../../config/default.nix
     ];
 
@@ -52,50 +52,48 @@
 #-----------------------------------------------------------------------------------------#
   # Services and Hardware
 #-----------------------------------------------------------------------------------------#
-  services = {
-    xserver = {
-      enable = true;
-      # videoDrivers = ["nvidia"];
-    };
+  hardware = {
+    bluetooth.enable = true;
   };
-  
-  # hardware = {
-  #   nvidia = {
-  #     modesetting.enable = true;
-  #     open = true;
-  #     nvidiaSettings = true;
-  #   };
-  # };
 
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  services.printing.enable = true;
-  
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa = {
+
+  services = {
+    pipewire = {
       enable = true;
-      support32Bit = true;
+      pulse.enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      jack.enable = true;
     };
-    jack.enable = true;
+    blueman.enable = true;
+    printing.enable = true;
+    libinput.enable = true;
+
+    # hardware = {
+    #   nvidia = {
+    #     modesetting.enable = true;
+    #     open = true;
+    #     nvidiaSettings = true;
+    #   };
+    # };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
+  programs.nix-ld.enable = true;
 #-----------------------------------------------------------------------------------------#
   # Desktop
 #-----------------------------------------------------------------------------------------#
-#  programs.hyprland = {
-#    enable = true;
-#    xwayland.enable = true;
-#  };
   environment.systemPackages = with pkgs; [
    brave
+   neovim
+   git
+   gh
+   wget
+   unzip
+   wireplumber
   ];
 
 #-----------------------------------------------------------------------------------------#

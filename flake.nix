@@ -1,15 +1,22 @@
 {
-  description = "A very basic flake";
+  description = "'Niks' means 'nothing' in Afrikaans... Thus, nothing is happening here ;)";
 
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
     nix-ld = {
       url = "github:Mic92/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    quickshell = {
+        url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ghostty = {
       url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -20,22 +27,28 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in {
       nixosConfigurations = {
-        archie = lib.nixosSystem {
+
+        archies-brother = lib.nixosSystem {
 	        inherit system;
 	        modules = [
 	          ./system/archies-brother/configuration.nix
+
+	        ];
+	      };
+
+        archie = lib.nixosSystem {
+	        inherit system;
+	        modules = [
+	          ./system/archie/configuration.nix
 
 	          ({pkgs, ...}: {
 	            environment.systemPackages = [
 	            ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
 	            ];
 	          })
-
-            # nix-ld.nixosModules.nix-ld
-            # { programs.nix-ld.dev.enable = true; }
-
 	        ];
 	      };
+
       };
     };
 }

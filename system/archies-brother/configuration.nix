@@ -33,7 +33,7 @@
 #-----------------------------------------------------------------------------------------#
   # Networking
 #-----------------------------------------------------------------------------------------#
-  networking.hostName = "archie";
+  networking.hostName = "archies-brother";
   networking.networkmanager.enable = true;
 
 #-----------------------------------------------------------------------------------------#
@@ -52,23 +52,36 @@
 #-----------------------------------------------------------------------------------------#
   # Services and Hardware
 #-----------------------------------------------------------------------------------------#
+  hardware = {
+    bluetooth.enable = true;
+  };
 
-  services.printing.enable = true;
-  
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa = {
+
+  services = {
+    pipewire = {
       enable = true;
-      support32Bit = true;
+      pulse.enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      jack.enable = true;
     };
-    jack.enable = true;
+    blueman.enable = true;
+    printing.enable = true;
+    libinput.enable = true;
+
+    # hardware = {
+    #   nvidia = {
+    #     modesetting.enable = true;
+    #     open = true;
+    #     nvidiaSettings = true;
+    #   };
+    # };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
   programs.nix-ld.enable = true;
 #-----------------------------------------------------------------------------------------#
   # Desktop
