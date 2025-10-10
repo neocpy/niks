@@ -68,11 +68,18 @@
 
   # ==========================================================================
 
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
+  programs = {
+    sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
 
-    package = pkgs.swayfx;
+      package = pkgs.swayfx;
+    };
+
+    niri = {
+        enable = true;
+        package = pkgs.niri;
+      };
   };
 
   services = {

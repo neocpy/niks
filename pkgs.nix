@@ -6,9 +6,10 @@
     # Internet  
      qutebrowser
      python313Packages.adblock
-
     # Art
      krita
+    # Design
+     freecad
    #Editors
      # emacs
    #Terminal
