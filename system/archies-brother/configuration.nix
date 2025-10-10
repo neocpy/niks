@@ -71,6 +71,14 @@
     blueman.enable = true;
     printing.enable = true;
     libinput.enable = true;
+
+    # hardware = {
+    #   nvidia = {
+    #     modesetting.enable = true;
+    #     open = true;
+    #     nvidiaSettings = true;
+    #   };
+    # };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
