@@ -9,8 +9,16 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../pkgs.nix
-      ../../config/default.nix
+      ../../config/archie.nix
     ];
+
+  system.activationScripts.binSh = let
+    shell = "${pkgs.bash}/bin/bash";
+  in ''
+    mkdir -m 0755 -p /bin
+    ln -sf ${shell} /bin/bash
+    ln -sf ${shell} /bin/sh
+  '';
 
 #-----------------------------------------------------------------------------------------#
   # Bootloader 
@@ -42,23 +50,15 @@
   time.timeZone = "Africa/Johannesburg";
 
   i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
 
 #-----------------------------------------------------------------------------------------#
   # Services and Hardware
 #-----------------------------------------------------------------------------------------#
-  hardware = {
-    bluetooth.enable = true;
-  };
 
   security.rtkit.enable = true;
 
   services = {
+
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -68,33 +68,34 @@
       };
       jack.enable = true;
     };
+
     blueman.enable = true;
     printing.enable = true;
     libinput.enable = true;
-
-    # hardware = {
-    #   nvidia = {
-    #     modesetting.enable = true;
-    #     open = true;
-    #     nvidiaSettings = true;
-    #   };
-    # };
+    
+    xserver.videoDrivers = ["nvidia"];
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
+  hardware = {
+
+    nvidia = {
+      modesetting.enable = true;
+      open = true;
+      nvidiaSettings = true;
+      powerManagement.enable = true;
+    };
+
+    bluetooth.enable = true;
+  };
+
+  environment.variables = {
+    __NV_PRIME_RENDER_OFFLOAD = "1";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    EGL_PLATFORM = "x11";
+  };
+
   programs.nix-ld.enable = true;
-#-----------------------------------------------------------------------------------------#
-  # Desktop
-#-----------------------------------------------------------------------------------------#
-  environment.systemPackages = with pkgs; [
-   brave
-   neovim
-   git
-   gh
-   wget
-   unzip
-   wireplumber
-  ];
+
 
 #-----------------------------------------------------------------------------------------#
   # Users and Packages
@@ -105,6 +106,22 @@
     packages = with pkgs; [
     ];
   };
+
+  environment.systemPackages = with pkgs; [
+    brave
+    neovim
+    git
+    gh
+    wget
+    unzip
+    wireplumber
+
+    libva
+    glxinfo
+    vaapiVdpau
+    libvdpau-va-gl
+    nvidia-vaapi-driver
+  ];
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
