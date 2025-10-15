@@ -4,35 +4,50 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "ohci_pci" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/38545157-38d5-4594-aa34-e05e633e281a";
+    { device = "/dev/disk/by-uuid/21e1dab0-1472-43c5-9b8a-c131b609b0cd";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F070-1A76";
+    { device = "/dev/disk/by-uuid/A21D-AD39";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/e71712cb-f6ff-4d56-a7b2-57627ecebceb"; }
-    ];
+  swapDevices = [ ];
 
+  fileSystems."/home/sophos/mnt/QuickBoi" =
+    { device = "/dev/disk/by-uuid/f92d669b-39b8-41d7-991c-7a11a33cb118";
+      fsType = "ext4";
+    };
+
+  # fileSystems."/" =
+  #   { device = "/dev/disk/by-uuid/21e1dab0-1472-43c5-9b8a-c131b609b0cd";
+  #     fsType = "ext4";
+  #   };
+  #
+  # fileSystems."/" =
+  #   { device = "/dev/disk/by-uuid/21e1dab0-1472-43c5-9b8a-c131b609b0cd";
+  #     fsType = "ext4";
+  #   };
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s3.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp8s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp5s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  virtualisation.virtualbox.guest.enable = true;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

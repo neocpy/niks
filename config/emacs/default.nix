@@ -1,15 +1,26 @@
-{ pkgs, config, lib,... }:
+{ pkgs, config, lib, callPackage, ... }:
 {
   
-  home.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
+    emacs
     ripgrep
     fd
+    emacsPackages.vertico
+    emacsPackages.websocket
+    texliveFull
+    auctex
+    ghostscript
   ];
 
-  home.sessionVariables = {
+  services.emacs = {
+    enable = true; 
+    package = pkgs.emacs-unstable;
   };
 
-  home.file = {
-    ".config/hypr/userprefs.conf".source = ./userprefs.conf;
-  };
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+      sha256 = "1nn85gyzmlqq60arajcra9d18aciy77j7nhpg7gn08pd0b34j81i";
+    }))
+  ];
 }

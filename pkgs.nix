@@ -4,21 +4,20 @@
    environment.systemPackages = with pkgs; [
    #Apps
     # Internet  
-     qutebrowser
-     python313Packages.adblock
+      qutebrowser
+      python313Packages.adblock
     # Art
-     krita
+      krita
     # Design
-     freecad
-   #Editors
-     # emacs
+      freecad
+    # Games
+      vesktop
    #Terminal
      fastfetch
-     # jq
-     # parallel
+     jq
+     parallel
    #Utility
-     # rofi-wayland
-     # nix-prefetch
+     nix-prefetch
      btop
      regex-cli
    #Filesystem
@@ -31,16 +30,11 @@
    #   graphviz
    #   shellcheck
    #   nixfmt-rfc-style
-   #   emacsPackages.vertico
-   #   emacsPackages.websocket
    #Other
-   #   texliveFull
-   #   auctex
-   #   ghostscript
    #Services
      pavucontrol
-   #   easyeffects
-   #   udiskie
+     easyeffects
+     udiskie
    #   syncthing
    #Wayland Dependencies
      #-------------------------
@@ -50,12 +44,6 @@
      # swappy
    ];
 
-  # nixpkgs.overlays = [
-  #   (import (builtins.fetchTarball {
-  #     url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-  #     sha256 = "0xd9b3hs7gql2k2c4h324cisbawlid71n2db2bdajqr3gqgz4lfd";
-  #   }))
-  # ];
 
   fonts = {
     packages = with pkgs; [

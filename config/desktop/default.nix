@@ -23,6 +23,9 @@
     wl-clipboard
     mako
     swaybg
+    xwayland-satellite
+    egl-wayland
+    fuzzel
   ];
 
   #==========================================================================
@@ -30,7 +33,10 @@
   #==========================================================================
   
   hardware = {
-    graphics.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
   };
 
   services.gnome.gnome-keyring.enable = true;
@@ -69,17 +75,14 @@
   # ==========================================================================
 
   programs = {
-    sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-
-      package = pkgs.swayfx;
-    };
-
     niri = {
-        enable = true;
-        package = pkgs.niri;
-      };
+      enable = true;
+      package = pkgs.niri;
+    };
+       
+    xwayland.enable = true;
+
+    waybar.enable = true;
   };
 
   services = {
@@ -89,6 +92,16 @@
         xterm.enable = false;
         xfce.enable = true;
       };
+
+      windowManager.i3 = {
+        enable = true;
+        extraPackages = with pkgs; [
+          dmenu
+          i3lock
+          i3status
+        ];
+      };
+      xkb.layout = "us";
     };
 
     libinput = {
