@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../pkgs.nix
-      ../../config/default.nix
+      ../../config/archies-brother.nix.nix
     ];
 
 #-----------------------------------------------------------------------------------------#
