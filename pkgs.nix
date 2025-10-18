@@ -6,10 +6,12 @@
     # Internet  
       qutebrowser
       python313Packages.adblock
+      python312Packages.adblock
     # Art
       krita
     # Design
       freecad
+      prusa-slicer
     # Games
       vesktop
    #Terminal
@@ -23,6 +25,7 @@
    #Filesystem
      btrfs-progs
      ntfs3g
+     krusader
    #General Dependecies
      python3
      clang-tools
@@ -44,6 +47,9 @@
      # swappy
    ];
 
+  programs = {
+    thunar.enable = true;    
+  };
 
   fonts = {
     packages = with pkgs; [
