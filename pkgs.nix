@@ -61,6 +61,7 @@
       jetbrains-mono
       nerd-fonts.symbols-only
       nerd-fonts.iosevka-term-slab
+      source-sans-pro
     ];
   };
 }
