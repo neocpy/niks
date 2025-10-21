@@ -18,9 +18,15 @@
       url = "github:ghostty-org/ghostty";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    twow-launcher = {
+      url = "github:vaxvhbe/twow-launcher";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, ghostty, nix-ld, ... }: 
+  outputs = { self, nixpkgs, ghostty, nix-ld, twow-launcher, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -40,12 +46,14 @@
 	        inherit system;
 	        modules = [
 	          ./system/archie/configuration.nix
+            twow-launcher.nixosModules.default
 
 	          ({pkgs, ...}: {
 	            environment.systemPackages = [
 	            ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
 	            ];
 	          })
+
 	        ];
 	      };
 
