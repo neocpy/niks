@@ -7,7 +7,7 @@
     ./desktop
     ./emacs
     ./freecad
-    ./lutris
+    ./gaming/default.nix
     ./nvim
   ];
 }
