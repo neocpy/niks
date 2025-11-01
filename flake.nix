@@ -24,14 +24,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    swww = {
-      url = "github:LGFae/swww";
+    # Add nix-addons-manager to outputs
+    nix-addons-manager = {
+      url = "github:neocpy/nix-addons-manager";  # or e.g., "github:yourname/nix-gitaddonsmanager"
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
 
-  outputs = { self, nixpkgs, ghostty, nix-ld, twow-launcher, swww, ... }:
+  outputs = { self, nixpkgs, ghostty, nix-ld, twow-launcher, nix-addons-manager, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -43,13 +44,6 @@
 	        inherit system;
 	        modules = [
 	          ./system/archies-brother/configuration.nix
-
-	          ({pkgs, ...}: {
-	            environment.systemPackages = [
-                ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
-                swww.packages.${pkgs.system}.swww
-	            ];
-	          })
 
 	        ];
 	      };
@@ -63,7 +57,7 @@
 	          ({pkgs, ...}: {
 	            environment.systemPackages = [
                 ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
-                swww.packages.${pkgs.system}.swww
+                nix-addons-manager.packages.${pkgs.stdenv.hostPlatform.system}.default
 	            ];
 	          })
 

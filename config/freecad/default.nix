@@ -1,11 +1,17 @@
-{ config, pkgs, lib, ...}:
+{ config, pkgs, ... }:
+
 {
-  environment.systemPackages = with pkgs; [
-    (writeShellScriptBin "freecad" ''
-      export __NV_PRIME_RENDER_OFFLOAD=1
-      export __GLX_VENDOR_LIBRARY_NAME=nvidia
-      exec ${freecad}/bin/freecad "$@"
-    '')
+  environment.systemPackages = [
+    (pkgs.symlinkJoin {
+      name = "freecad-wrapped";
+      paths = [ pkgs.freecad ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/freecad \
+          --set QT_QPA_PLATFORM xcb \
+          --set MESA_GL_VERSION_OVERRIDE 4.5 \
+          --set MESA_GLSL_VERSION_OVERRIDE 450
+      '';
+    })
   ];
 }
-
