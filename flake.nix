@@ -24,9 +24,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    swww = {
+      url = "github:LGFae/swww";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, ghostty, nix-ld, twow-launcher, ... }:
+  outputs = { self, nixpkgs, ghostty, nix-ld, twow-launcher, swww, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -39,6 +44,13 @@
 	        modules = [
 	          ./system/archies-brother/configuration.nix
 
+	          ({pkgs, ...}: {
+	            environment.systemPackages = [
+                ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+                swww.packages.${pkgs.system}.swww
+	            ];
+	          })
+
 	        ];
 	      };
 
@@ -50,7 +62,8 @@
 
 	          ({pkgs, ...}: {
 	            environment.systemPackages = [
-	            ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+                ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+                swww.packages.${pkgs.system}.swww
 	            ];
 	          })
 

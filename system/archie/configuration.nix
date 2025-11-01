@@ -108,7 +108,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    brave
     neovim
     git
     gh

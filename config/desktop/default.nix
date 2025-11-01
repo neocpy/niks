@@ -26,6 +26,8 @@
     xwayland-satellite
     egl-wayland
     fuzzel
+    brightnessctl
+    lz4
   ];
 
   #==========================================================================
