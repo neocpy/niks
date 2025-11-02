@@ -26,6 +26,7 @@
      btrfs-progs
      ntfs3g
      krusader
+     appimage-run
    #General Dependecies
      python3
      clang-tools
@@ -56,7 +57,7 @@
       font-awesome
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       material-icons
       jetbrains-mono
       nerd-fonts.symbols-only

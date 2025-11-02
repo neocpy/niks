@@ -3,6 +3,6 @@
 {
   imports = [
     ./lutris.nix
-    ./turtleWoW.nix
+    # ./turtleWoW.nix
   ];
 }

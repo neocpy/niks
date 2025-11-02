@@ -14,25 +14,22 @@
         inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        quickshell.follows = "quickshell";
+      };
+    };
+
     ghostty = {
       url = "github:ghostty-org/ghostty";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    twow-launcher = {
-      url = "github:vaxvhbe/twow-launcher";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Add nix-addons-manager to outputs
-    nix-addons-manager = {
-      url = "github:neocpy/nix-addons-manager";  # or e.g., "github:yourname/nix-gitaddonsmanager"
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
-  outputs = { self, nixpkgs, ghostty, nix-ld, twow-launcher, nix-addons-manager, ... }:
+  outputs = { self, nixpkgs, ghostty, nix-ld, noctalia, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -45,6 +42,13 @@
 	        modules = [
 	          ./system/archies-brother/configuration.nix
 
+	          ({pkgs, ...}: {
+	            environment.systemPackages = [
+                ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+                noctalia.packages.${pkgs.system}.default
+	            ];
+	          })
+
 	        ];
 	      };
 
@@ -52,12 +56,11 @@
 	        inherit system;
 	        modules = [
 	          ./system/archie/configuration.nix
-            twow-launcher.nixosModules.default
 
 	          ({pkgs, ...}: {
 	            environment.systemPackages = [
                 ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
-                nix-addons-manager.packages.${pkgs.stdenv.hostPlatform.system}.default
+                noctalia.packages.${pkgs.system}.default
 	            ];
 	          })
 

@@ -5,9 +5,9 @@
     emacs
     ripgrep
     fd
-    emacsPackages.vertico
-    emacsPackages.websocket
-    emacsPackages.mu4e
+    emacs.pkgs.vertico
+    emacs.pkgs.websocket
+    emacs.pkgs.mu4e
     texliveFull
     auctex
     ghostscript
@@ -23,7 +23,7 @@
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
       url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-      sha256 = "02d8c24hq4x28g1cvhzi8kz7s2q2clibahnxrx44vb3hhv99zasj";
+      sha256 = "0b86zkcd4xyjkk4qbp99sbmlg70l85yi43k9sm9y4wdwj7vil1kg";
     }))
   ];
 }

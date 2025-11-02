@@ -116,8 +116,8 @@
     wireplumber
 
     libva
-    glxinfo
-    vaapiVdpau
+    mesa-demos
+    libva-vdpau-driver
     libvdpau-va-gl
     nvidia-vaapi-driver
   ];
