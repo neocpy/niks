@@ -7,13 +7,18 @@
       qutebrowser
       python313Packages.adblock
       python312Packages.adblock
+      brave
     # Art
       krita
+      gimp
     # Design
       freecad
       prusa-slicer
     # Games
       vesktop
+      qbittorrent
+    # Work
+      onlyoffice-desktopeditors
    #Terminal
      fastfetch
      jq
@@ -22,11 +27,14 @@
      nix-prefetch
      btop
      regex-cli
+     unrar
    #Filesystem
      btrfs-progs
      ntfs3g
      krusader
      appimage-run
+     exfat
+     exfatprogs
    #General Dependecies
      python3
      clang-tools
@@ -39,6 +47,8 @@
      pavucontrol
      easyeffects
      udiskie
+     canon-cups-ufr2
+     canon-capt
    #   syncthing
    #Wayland Dependencies
      #-------------------------

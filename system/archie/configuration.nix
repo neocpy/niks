@@ -69,6 +69,12 @@
       jack.enable = true;
     };
 
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+
     blueman.enable = true;
     printing.enable = true;
     libinput.enable = true;
@@ -92,6 +98,7 @@
     __NV_PRIME_RENDER_OFFLOAD = "1";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     EGL_PLATFORM = "x11";
+    XDG_CURRENT_DESKTOP = "wlroots";
   };
 
   programs.nix-ld.enable = true;
