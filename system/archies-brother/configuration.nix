@@ -16,17 +16,24 @@
   # Bootloader 
 #-----------------------------------------------------------------------------------------#
 
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
+  boot = {
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+
+      grub = {
+        enable = true;
+        devices = ["nodev"];
+        efiSupport = true;
+        useOSProber = true;
+      };
     };
-    grub = {
-      enable = true;
-      devices = ["nodev"];
-      efiSupport = true;
-      useOSProber = true;
-    };
+
+    kernelParams = [
+      "usbcore.autosuspend=-1"
+    ];
   };
 
 
@@ -39,7 +46,10 @@
 #-----------------------------------------------------------------------------------------#
   # Timezone and locale
 #-----------------------------------------------------------------------------------------#
-  time.timeZone = "Africa/Johannesburg";
+  time = {
+    timeZone = "Africa/Johannesburg";
+    hardwareClockInLocalTime = true;
+  };
 
   i18n.defaultLocale = "en_US.UTF-8";
   # console = {

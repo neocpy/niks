@@ -13,6 +13,7 @@
     ghostscript
     ispell
     mu
+    graphviz
   ];
 
   services.emacs = {
@@ -23,7 +24,7 @@
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
       url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-      sha256 = "1lkn430ph22x2f5msjf5bs0r667nz8pnibnwc9ff4q8s4jcggbk2";
+      sha256 = "15wmw5f8xc0jlp9kx2dbfslvidlv1m23sxss6m9855frdlhwgm4j";
     }))
   ];
 }

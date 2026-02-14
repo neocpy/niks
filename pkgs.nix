@@ -28,6 +28,8 @@
      btop
      regex-cli
      unrar
+     zathura
+     usbutils
    #Filesystem
      btrfs-progs
      ntfs3g

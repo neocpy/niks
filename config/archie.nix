@@ -3,7 +3,7 @@
   imports = [
     #./gtk
     #./git
-    #./extra
+    # ./extra/default.nix
     ./desktop
     ./emacs
     ./freecad

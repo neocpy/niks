@@ -3,10 +3,11 @@
   imports = [
     #./gtk
     #./git
-    #./extra
+    ./extra
     ./desktop
     ./emacs
     ./freecad
     ./nvim
+    ./battery.nix
   ];
 }
